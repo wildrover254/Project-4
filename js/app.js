@@ -2,7 +2,6 @@ const keyboard = document.getElementById('qwerty');
 const board = document.querySelector('ul');
 const tries = document.getElementsByClassName('tries');
 const keys = document.querySelectorAll('.keyrow button');
-const overlay = document.getElementById('overlay');
 
 let game = null;
 /**
@@ -10,6 +9,8 @@ let game = null;
  * Generates a new Game object and starts a game
  */
 document.getElementById('btn__reset').addEventListener('click', (e) => {
+    let overlay = document.getElementById('overlay');
+
     while(board.firstChild) {
         board.removeChild(board.firstChild);
     }
@@ -20,6 +21,7 @@ document.getElementById('btn__reset').addEventListener('click', (e) => {
         keys[i].setAttribute('class', 'key');
         keys[i].removeAttribute('disabled');
     }
+    overlay.className = 'start';
     game = new Game();
     game.startGame();
 });
@@ -37,6 +39,7 @@ keyboard.addEventListener('click', function(event) {
 })
 
 document.addEventListener('keydown', function(event){
+    const overlay = document.getElementById('overlay').className;
     const keyPressed = event.code;
     const keyValue = keyPressed.slice(keyPressed.length - 1).toLowerCase();
     let btn;
@@ -45,7 +48,7 @@ document.addEventListener('keydown', function(event){
             btn = keys[i];
         }
     }
-    if (game != null) {
+    if (game != null && overlay != 'win' && overlay != 'lose') {
     game.handleInteraction(btn);
     }
 })

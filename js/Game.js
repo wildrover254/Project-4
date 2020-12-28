@@ -94,10 +94,12 @@ won
         if (gameWon == true) {
             overlay.classList.add('win');
             overlay.classList.remove('lose');
+            overlay.classList.remove('start');
             message.textContent = 'Congratulations, you win!';
         } else if (this.missed >= 5) {
             overlay.classList.add('lose');
             overlay.classList.remove('win');
+            overlay.classList.remove('start');
             message.textContent = 'Sorry, try Again!';
         }
     }
