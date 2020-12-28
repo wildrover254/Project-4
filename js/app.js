@@ -2,8 +2,9 @@ const keyboard = document.getElementById('qwerty');
 const board = document.querySelector('ul');
 const tries = document.getElementsByClassName('tries');
 const keys = document.querySelectorAll('.keyrow button');
+const overlay = document.getElementById('overlay');
 
-let game;
+let game = null;
 /**
  * Resets the gameboard on each click
  * Generates a new Game object and starts a game
@@ -44,5 +45,7 @@ document.addEventListener('keydown', function(event){
             btn = keys[i];
         }
     }
+    if (game != null) {
     game.handleInteraction(btn);
+    }
 })
